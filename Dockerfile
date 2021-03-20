@@ -1,4 +1,5 @@
-FROM postgres-nv:12 as compile-image
+FROM dafne-db-times:latest as compile-image
+
 RUN localedef -i es_AR -c -f UTF-8 -A /usr/share/locale/locale.alias es_AR.UTF-8
 ENV LANG es_AR.utf8
 COPY install_scripts/install_pgis.sh .
@@ -15,6 +16,7 @@ COPY buildb.sh /docker-entrypoint-initdb.d/
 
 # Copy raw data, used for database inizialization.
 COPY datos /var/lib/postgresql/sismodb/datos/
+
 RUN chown -R postgres:postgres /var/lib/postgresql/sismodb/datos/
 
 # Docker-initpiont is a slightly modified version of docker-entrypoint.
@@ -37,4 +39,4 @@ RUN ./install_xz-utils.sh
 
 COPY --from=compile-image $PGDATA $PGDATA
 #Make volume, data for new containers freezes here
-VOLUME /var/lib/postgresql/data
+#VOLUME /var/lib/postgresql/data

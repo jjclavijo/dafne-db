@@ -261,11 +261,12 @@ _main() {
 			exec gosu postgres "$BASH_SOURCE" "$@"
 		fi
 
+    # Run initialization ALLWAYS
 		# only run initialization on an empty data directory
-		if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
+		# if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
 			docker_verify_minimum_env
-			docker_init_database_dir
-			pg_setup_hba_conf
+			#docker_init_database_dir
+			#pg_setup_hba_conf
 
 			# PGPASSWORD is required for psql when authentication is required for 'local' connections via pg_hba.conf and is otherwise harmless
 			# e.g. when '--auth=md5' or '--auth-local=md5' is used in POSTGRES_INITDB_ARGS
@@ -281,11 +282,11 @@ _main() {
 			echo
 			echo 'PostgreSQL init process complete; ready for start up.'
 			echo
-		else
-			echo
-			echo 'PostgreSQL Database directory appears to contain a database; Skipping initialization'
-			echo
-		fi
+		#else
+		#	echo
+		#	echo 'PostgreSQL Database directory appears to contain a database; Skipping initialization'
+		#	echo
+		#fi
 	fi
 
 }
