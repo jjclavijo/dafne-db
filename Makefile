@@ -1,6 +1,7 @@
 #HTTP_PROXY=http://proxylh.fi.uba.ar:8080
 #HTTPS_PROXY=http://proxylh.fi.uba.ar:8080
-DB_TAG=0.2
+TAG="dafne-db-times"
+VERSION="latest"
 
 export SHELL:=/bin/bash
 export SHELLOPTS:=$(if $(SHELLOPTS),$(SHELLOPTS):)pipefail:errexit
@@ -30,7 +31,7 @@ build: mount-data
 	$(MAKE) build-db
 
 build-db: docker-initpoint.sh
-	docker build . -t dafne-db:${DB_TAG}
+	docker build . -t ${TAG}:${VERSION}
 
 docker-initpoint.sh:
 ifdef HTTPS_PROXY

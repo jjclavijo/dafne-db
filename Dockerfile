@@ -37,4 +37,4 @@ RUN ./install_xz-utils.sh
 
 COPY --from=compile-image $PGDATA $PGDATA
 #Make volume, data for new containers freezes here
-VOLUME /var/lib/postgresql/data
+#VOLUME /var/lib/postgresql/data
