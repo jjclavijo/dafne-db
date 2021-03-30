@@ -8,6 +8,8 @@ export SHELLOPTS:=$(if $(SHELLOPTS),$(SHELLOPTS):)pipefail:errexit
 
 .ONESHELL:
 
+default: build
+
 .PHONY: check-env
 check-env:
 ifndef DAFNE_HOME
