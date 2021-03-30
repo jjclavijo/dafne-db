@@ -16,20 +16,8 @@ ifndef DAFNE_HOME
 	$(error DAFNE_HOME not set)
 endif
 
-.PHONY: mount-data
-mount-data: check-env
-	bindfs -n $(DAFNE_HOME)/data datos 
-
-.PHONY: umount-data
-umount-data:
-	fusermount -u datos
-
 .PHONY: test
-build: mount-data
-	function tearDown {
-	    $(MAKE) umount-data
-	}
-	trap tearDown EXIT
+build: 
 	$(MAKE) build-db
 
 build-db: docker-initpoint.sh

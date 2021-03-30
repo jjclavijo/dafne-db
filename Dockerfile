@@ -1,3 +1,5 @@
+FROM dafne-db:data-21.01 as data-image
+
 FROM dafne-db-times:latest as compile-image
 
 RUN localedef -i es_AR -c -f UTF-8 -A /usr/share/locale/locale.alias es_AR.UTF-8
@@ -15,7 +17,7 @@ COPY manejo-datos /var/lib/postgresql/sismodb/manejo-datos/
 COPY buildb.sh /docker-entrypoint-initdb.d/
 
 # Copy raw data, used for database inizialization.
-COPY datos /var/lib/postgresql/sismodb/datos/
+COPY --from=data-image /data /var/lib/postgresql/sismodb/datos/
 
 RUN chown -R postgres:postgres /var/lib/postgresql/sismodb/datos/
 
