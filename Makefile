@@ -8,6 +8,8 @@ export SHELLOPTS:=$(if $(SHELLOPTS),$(SHELLOPTS):)pipefail:errexit
 
 .ONESHELL:
 
+default: build
+
 .PHONY: check-env
 check-env:
 ifndef DAFNE_HOME
@@ -22,7 +24,7 @@ mount-data: check-env
 umount-data:
 	fusermount -u datos
 
-.PHONY: test
+.PHONY: build
 build: mount-data
 	function tearDown {
 	    $(MAKE) umount-data
