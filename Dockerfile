@@ -1,6 +1,6 @@
-FROM dafne-db:data-21.01 as data-image
+FROM docker.io/jjclavijo/dafne-db:data-21.01 as data-image
 
-FROM dafne-db-times:latest as compile-image
+FROM docker.io/jjclavijo/dafne-db:times-latest as compile-image
 
 RUN localedef -i es_AR -c -f UTF-8 -A /usr/share/locale/locale.alias es_AR.UTF-8
 ENV LANG es_AR.utf8
@@ -31,7 +31,7 @@ COPY docker-initpoint.sh .
 RUN ["/bin/bash", "-c", "./docker-initpoint.sh postgres"]
 
 # Raw data don't go into image.
-FROM postgres-nv:12
+FROM docker.io/jjclavijo/postgres-nv:latest
 RUN localedef -i es_AR -c -f UTF-8 -A /usr/share/locale/locale.alias es_AR.UTF-8
 ENV LANG es_AR.utf8
 COPY install_scripts/install_pgis.sh .
