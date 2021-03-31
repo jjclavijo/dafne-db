@@ -1,7 +1,7 @@
 #HTTP_PROXY=http://proxylh.fi.uba.ar:8080
 #HTTPS_PROXY=http://proxylh.fi.uba.ar:8080
-TAG="dafne-db-times"
-VERSION="latest"
+TAG="dafne-db"
+VERSION="times-latest"
 
 export SHELL:=/bin/bash
 export SHELLOPTS:=$(if $(SHELLOPTS),$(SHELLOPTS):)pipefail:errexit
